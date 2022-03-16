@@ -9,18 +9,39 @@
   </head> 
 
   <body>
-      <nav>
+      <section>
           <h3>View Highscores</h3>
           <h3 class="time" style="text-align:right; margin-right: 40px;"></h3>
-      </nav>
+      </section>
 
-      <div>
+      <section class="startGame hidden">
+        <h1>Code Quiz!</h1>
+        <button class="start">Start Game</button>
+    </section>
+
+      <section class="duringGame hidden">
         <h4>Question: <span id ="question"></span></h4>
         <button id="option1">Option 1</button>
         <button id="option2">Option 2</button>
         <button id="option3">Option 3</button>
         <button id="option4">Option 4</button>
-      </div>
+        <p id="response"></p>
+      </section>
+
+      <section class="afterGame hidden">
+        <h2>All Done!</h2>
+        <form>
+          <label for="text">Initials here: </label>
+          <textarea id="text" name="initials"></textarea>
+        </form>
+        <button id="submitInitials">Submit</button>
+      </section>
+
+      <section class="highScores hidden">
+        <p>HighScores: <span id="savedScores"></span></p>
+        <button class="restart">Start Game</button>
+        <button id="clearScores">Clear Scores</button>
+      </section>
 
     <script src="./assets/js/script.js"></script>
   </body>

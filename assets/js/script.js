@@ -5,30 +5,48 @@ var option1El = document.querySelector("#option1");
 var option2El = document.querySelector("#option2");
 var option3El = document.querySelector("#option3");
 var option4El = document.querySelector("#option4");
+//var statusEl = document.querySelector(".hidden");
+var startGameEl = document.querySelector(".startGame");
+var duringGameEl = document.querySelector(".duringGame");
+var startEl = document.querySelector(".start");
 
 //Add Event Listeners here:
 //may be only need one event lsiterner for container, user id to determine which object is being pressed.
-option1El.addEventListener("click", function(){console.log("option1 pressed")}); //check answer funciton here?
+option1El.addEventListener("click", function(){
+    checkAnswer();
+}); //check answer funciton here?
+
 option2El.addEventListener("click", function(){console.log("option2 pressed")});
 option3El.addEventListener("click", function(){console.log("option3 pressed")});
 option4El.addEventListener("click", function(){console.log("option4 pressed")});
 
+startEl.addEventListener("click", function() {
+    duringGame();
+});
+
+
 //Global Variables defined here
-var countDownTimer = 75;
+var countDownTimer = 5;
+var visible;
 
 //Defines what happens every 1 second
-var timerInterval = setInterval(function(){
+function setTimer() {
+    var timerInterval = setInterval(function(){
+        if(!countDownTimer == 0) {
+            countDownTimer--;
+            timeEl.textContent = "Timer: " + countDownTimer;
+        } else { 
+            clearInterval(timerInterval);
+            afterGame(); }
 
-    countDownTimer--;
-    timeEl.textContent = "Timer: " + countDownTimer;
-
-}, 1000);
+    }, 1000);
+}
 
 //clear timer interval
 //Create Objects with questions, answers and correct answer
 
 var currentQuestionIndex = 0; // Iterated ++ after an answer chose, 
-var questionIndex = quizQuestion[currentQuestionIndex]
+//var questionIndex = quizQuestion[currentQuestionIndex]
 
 var quizQuestion = [{
     question: "What is the full form of .js?",
@@ -80,6 +98,28 @@ function showQuestion(quizQuestion, currentQuestionIndex) {
     
 }
 
+// Displaying the screen after loading html
+function init() {
+
+    startGameEl.setAttribute("class","visible");
+    
+}
+
+function duringGame() {
+
+    duringGameEl.setAttribute("class", "visible");
+    startGameEl.setAttribute("class","hidden");
+    setTimer();
+}
+
+function checkAnswer() {
+    
+}
+
+
+function afterGame () {};
+
+init();
 // current question index, every time question is asked go up again, when the
 
 // quiz start button pressed
@@ -95,3 +135,4 @@ function showQuestion(quizQuestion, currentQuestionIndex) {
 //var count = localStorage.getItem("count")
 //localStorage.setItem("count", count);
 // consider using acitivity 6 set attribute using for loop for showing questions, answers
+//use theme switcher from actitivty 11 to switch between pages
