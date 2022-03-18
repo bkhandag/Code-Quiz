@@ -5,3 +5,15 @@
 .visible {
     display:block;
 }
+
+button {
+    
+    background-color: purple;
+    color: white;
+    border-radius: 5%;
+}
+
+.duringGame {
+    /* display:flexbox; */
+    /* align-items: center; */
+}

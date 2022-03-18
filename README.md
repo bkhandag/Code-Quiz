@@ -1,7 +1,7 @@
 # Code-Quiz
 
 ## Description: 
-In this Quiz game, a user will be presented with questions related to coding.! The following criteria must be met.
+In this Quiz game, a user will be presented with questions related to coding! The following criteria must be met.
 
 * I can click a start button to enter quiz and start timer (counts down)
 * I can answer a question, get feedback on whether I was right or wrong, start next question
