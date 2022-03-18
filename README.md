@@ -1,6 +1,14 @@
 # Code-Quiz
 
-## Description:
+## Description: 
+In this Quiz game, a user will be presented with questions related to coding.! The following criteria must be met.
+
+* I can click a start button to enter quiz and start timer (counts down)
+* I can answer a question, get feedback on whether I was right or wrong, start next question
+* If answer is incorrect, time is subsctracted from clock
+* Game ends when time = 0 or all questions are answered
+* I have ability to save my initials and my score
+* I have ability to access high scroes
 
 ## Link to Application:
 https://bkhandag.github.io/Code-Quiz/
@@ -9,16 +17,6 @@ https://bkhandag.github.io/Code-Quiz/
 !["Wireframe for code-quiz".](./assets/Code-quiz-wireframe.jpeg)
 
 ## Pseudo Code:
-### What needs to happen:
-* Click start button to enter quiz and start timer (counts down)
-* Answer a question, get feedback on whether I was right or wrong, start next question
-* If answer is incorrect, I subsrtract time from clock
-* Game ends when time = 0 or all questions are answered
-* I have ability to save initials and my score
-* I have ability to access high scroes
-
-
-### How to get there:
 * Identify events
     - Page load
     - hitting start button
