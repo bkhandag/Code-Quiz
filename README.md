@@ -1,6 +1,15 @@
 # Code-Quiz
 
-What needs to happen:
+## Description:
+
+## Link to Application:
+https://bkhandag.github.io/Code-Quiz/
+
+## Wireframe:
+!["Wireframe for code-quiz".](./assets/Code-quiz-wireframe.jpeg)
+
+## Pseudo Code:
+### What needs to happen:
 * Click start button to enter quiz and start timer (counts down)
 * Answer a question, get feedback on whether I was right or wrong, start next question
 * If answer is incorrect, I subsrtract time from clock
@@ -9,7 +18,7 @@ What needs to happen:
 * I have ability to access high scroes
 
 
-How to get there:
+### How to get there:
 * Identify events
     - Page load
     - hitting start button
@@ -32,7 +41,7 @@ How to get there:
     - Game can be restarted from high score page.
 * Declare global (which event handlers will be tracked through out the program?) and state variables
 
-Logic:
+### Logic:
 1. Initialize timer.
 1. Create objects with questions, answers, correct answer
 1. While timer is counting down, first question is displayed with options
@@ -41,6 +50,8 @@ Logic:
 1. When timer = 0 or all questions have been asked, user prompted to save scores with initals
 1. user accesses high scores
 1. user can restart the game.
+
+## Screenshot
 
 
 References:
