@@ -11,12 +11,13 @@ var startGameEl = document.querySelector(".startGame");
 var duringGameEl = document.querySelector(".duringGame");
 var startEl = document.querySelector(".start");
 var afterGameEl = document.querySelector(".afterGame");
+var submitEl = document.querySelector("#submitInitials")
 
 //Global Variables defined here
 var countDownTimer = 60;
 var visible;
-var currentQuestionIndex = 0; // Iterated ++ after an answer chose, 
-var initials = [];
+var currentQuestionIndex = 0; // Iterated ++ after an answer chosen  
+var initials;
 var timerInterval;
 
 //Displaying the screen after loading html
@@ -62,6 +63,11 @@ duringGameEl.addEventListener("click", function(event) {
         
     }    
 })
+
+submitEl.addEventListener("click", function() {
+    event.preventDefault();
+    storeInitials();
+});
 
 //Timer of interval 1 second defined here:
 function setTimer() {
@@ -151,12 +157,25 @@ function afterGame () {
 
 };
 
-function storeInitials () {
+function storeInitials() {
 
     // Stringify and set key in localStorage to Initials array
-    localStorage.setItem("initials", JSON.stringify(intitials));
+    localStorage.setItem("initials", initials);
+    
+    var x = localStorage.getItem("initials");
+    document.getElementById("initials-list").innerHTML = x;
+    console.log(document.getElementById("initials-list").innerHTML);
 
   }
+
+//   function createItem() {
+//     localStorage.setItem("mytime", Date.now());
+//   }
+  
+//   function readValue() {
+//     var x = localStorage.getItem("mytime");
+//     document.getElementById("demo").innerHTML = x;
+//   }
 
 //Initializing of the Game
 init();
