@@ -11,18 +11,34 @@ var startGameEl = document.querySelector(".startGame");
 var duringGameEl = document.querySelector(".duringGame");
 var startEl = document.querySelector(".start");
 var afterGameEl = document.querySelector(".afterGame");
-var submitEl = document.querySelector("#submitInitials")
+var highScoresEl = document.querySelector(".highScores");
+var submitEl = document.querySelector("#submitInitials");
+var initialsListEl = document.querySelector("#initials-list");
+var restartEl = document.querySelector(".restart");
+var clearScoresEl = document.querySelector("#clearScores");
+var viewHighScoresEl = document.querySelector(".viewHighScores");
 
 //Global Variables defined here
 var countDownTimer = 60;
 var visible;
 var currentQuestionIndex = 0; // Iterated ++ after an answer chosen  
-var initials;
 var timerInterval;
 
 //Displaying the screen after loading html
 function init() {
+
     startGameEl.setAttribute("class","visible");
+
+    //Reinitialize global variables
+    currentQuestionIndex = 0;
+    countDownTimer = 60;
+
+    //Show timer and re initialize it
+    timeEl.setAttribute("class", "visible");
+    timeEl.textContent = "Timer: " + countDownTimer;
+
+    //Clears form submission
+    initials.value = "";
 }
 
 //Event Listener for start button to start the game:
@@ -46,7 +62,6 @@ duringGameEl.addEventListener("click", function(event) {
 
             duringGameEl.setAttribute("style", "background-color:red;"); 
             countDownTimer -= 5;
-
         }
         
         currentQuestionIndex++;
@@ -54,19 +69,50 @@ duringGameEl.addEventListener("click", function(event) {
         if (currentQuestionIndex == quizQuestion.length) {
 
             afterGame();
-            
 
         } else {
-
-        showQuestion();
-        //checkAnswer(option);
-        
+            
+            showQuestion();
     }    
 })
 
-submitEl.addEventListener("click", function() {
+//Initials Submission after game has ended
+submitEl.addEventListener("click", function(event) {
+
     event.preventDefault();
     storeInitials();
+
+    afterGameEl.setAttribute("class", "hidden");
+    highScoresEl.setAttribute("class", "visible");
+    timeEl.setAttribute("class", "hidden");
+});
+
+//View High Scores at top left takes you to highscores container
+viewHighScoresEl.addEventListener("click", function(event) {
+    highScoresEl.setAttribute("class", "visible");
+    startGameEl.setAttribute("class", "hidden");
+    removeList();
+    showList();
+})
+
+//Restarts game after storing score
+restartEl.addEventListener("click", function(event) {
+
+    init();
+    highScoresEl.setAttribute("class", "hidden");
+
+    //Remove the list from the highscores page
+    removeList();  
+});
+
+//Clears all highscores stored in local storage and variable used to store it
+clearScoresEl.addEventListener("click", function(event) {
+
+    localStorage.clear();
+    arrayScores=[];
+
+    //Remove the list from the highscores page
+    removeList();
 });
 
 //Timer of interval 1 second defined here:
@@ -85,7 +131,6 @@ function setTimer() {
             clearInterval(timerInterval);
             afterGame(); 
         }
-
     }, 1000);
 }
 
@@ -139,14 +184,7 @@ function duringGame() {
     startGameEl.setAttribute("class","hidden");
     setTimer();
     showQuestion();
-
 }
-
-//Check Answer function
-function checkAnswer(option) {
-
-}
-
 
 //After game screen is set to visible
 function afterGame () {
@@ -157,43 +195,49 @@ function afterGame () {
 
 };
 
+//Checking to see if arrayScores has something in it before reinitializing so we dont lose scores
+
+if (JSON.parse(localStorage.getItem("arrayScores")) == null) {
+    var arrayScores = [];
+} else {
+    //If array is not empty, initialize it to whats stored in localStorage.
+    var arrayScores = JSON.parse(localStorage.getItem("arrayScores"));
+}
+
 function storeInitials() {
 
-    // Stringify and set key in localStorage to Initials array
-    localStorage.setItem("initials", initials);
-    
-    var x = localStorage.getItem("initials");
-    document.getElementById("initials-list").innerHTML = x;
-    console.log(document.getElementById("initials-list").innerHTML);
+    // Creating score object to store input value
+        var score = {
+            initialsGot: initials.value.trim(),
+            currentScore: countDownTimer,
+        };
 
+        //Adding newest score to array
+        arrayScores.push(score);
+
+        //Stringify array so it can be stored to localStorage with new score
+        localStorage.setItem("arrayScores", JSON.stringify(arrayScores));
+        
+        //Populating the ordered list with scores from local storage and newest score
+        showList();
   }
 
-//   function createItem() {
-//     localStorage.setItem("mytime", Date.now());
-//   }
-  
-//   function readValue() {
-//     var x = localStorage.getItem("mytime");
-//     document.getElementById("demo").innerHTML = x;
-//   }
+  //Looping through all of the entries in local storage for scores and adding it to ordered list
+  function showList() {
+    for (var i = 0; i < arrayScores.length; i++) {
 
+        var li = document.createElement("li");
+        li.textContent = "Initials: " + arrayScores[i].initialsGot + " - Score: " + arrayScores[i].currentScore;
+        initialsListEl.appendChild(li);
+    }
+  };
+
+ //Remove the list from the highscores page
+  function removeList() {
+      while (initialsListEl.firstChild) {
+        initialsListEl.removeChild(initialsListEl.firstChild);
+      }
+    };
+  
 //Initializing of the Game
 init();
-
-
-// current question index, every time question is asked go up again, when the
-
-// quiz start button pressed
-// <div> with start button gets hidden
-// <div> with scores hidden 
-// timer starts counting down
-// first question appears
-// button pressed
-// answer checked, feedback presented, score incremented/decremented
-// next question showed.
-// hide question <div>
-// enable saving score with user initials
-//var count = localStorage.getItem("count")
-//localStorage.setItem("count", count);
-// consider using acitivity 6 set attribute using for loop for showing questions, answers
-//use theme switcher from actitivty 11 to switch between pages

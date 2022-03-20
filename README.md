@@ -50,7 +50,10 @@ https://bkhandag.github.io/Code-Quiz/
 1. user can restart the game.
 
 ## Screenshot
-
+!["Start Game Screen".](./assets/start-game.png)
+!["During Game SCreen".](./assets/during-game.png)
+!["Correct Answer Screen".](./assets/correct-answer.png)
+!["HighScores".](./assets/high-scores.png)
 
 References:
 https://simplestepscode.com/javascript-quiz-tutorial/
