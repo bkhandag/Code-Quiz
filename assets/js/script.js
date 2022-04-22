@@ -23,6 +23,7 @@ var countDownTimer = 60;
 var visible;
 var currentQuestionIndex = 0; // Iterated ++ after an answer chosen  
 var timerInterval;
+var correctScore = 0; //Count up everytime a correct answer is reached
 
 //Displaying the screen after loading html
 function init() {
@@ -32,6 +33,7 @@ function init() {
     //Reinitialize global variables
     currentQuestionIndex = 0;
     countDownTimer = 60;
+    correctScore = 0; 
 
     //Show timer and re initialize it
     timeEl.setAttribute("class", "visible");
@@ -57,6 +59,7 @@ duringGameEl.addEventListener("click", function(event) {
         || (quizQuestion[currentQuestionIndex] == quizQuestion[3] && option.matches("#option3"))) {
 
             duringGameEl.setAttribute("style", "background-color:green;"); 
+            correctScore += 10; //increment score by 10 points everytime a correct answer is selected
 
         } else {
 
@@ -100,6 +103,7 @@ restartEl.addEventListener("click", function(event) {
 
     init();
     highScoresEl.setAttribute("class", "hidden");
+    duringGameEl.setAttribute("style", "background-color:none;");  //TODO remove this if too much
 
     //Remove the list from the highscores page
     removeList();  
@@ -209,7 +213,7 @@ function storeInitials() {
     // Creating score object to store input value
         var score = {
             initialsGot: initials.value.trim(),
-            currentScore: countDownTimer,
+            currentScore: correctScore,
         };
 
         //Adding newest score to array
